@@ -12,7 +12,11 @@ import {
   PaginationContainer,
   PaginationPageGroup
 } from '@ajna/pagination'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
+import { Box, IconButton } from '@chakra-ui/react'
+import { MdEvent } from 'react-icons/md'
+import { SiQiita, SiZenn } from 'react-icons/si'
 
 const outerLimit = 1
 const innerLimit = 1
@@ -23,9 +27,61 @@ export default function Home() {
   const openUrl = (url: string) => {
     window.open(url, '_blank')
   }
+
+  const [filterWinc, setFilterWinc] = useState(true)
+  const [filterQiita, setFilterQiita] = useState(true)
+  const [filterZenn, setFilterZenn] = useState(true)
   return (
     <Layout>
       <Container maxW="container.lg">
+        <Box display={'flex'} justifyContent={'flex-end'} mb={'2'}>
+          <Box
+            display={'flex'}
+            backgroundColor={'white'}
+            justifyContent={'space-evenly'}
+            w={'36'}
+          >
+            <IconButton
+              aria-label="winc"
+              icon={<MdEvent />}
+              borderRadius={'50%'}
+              _hover={
+                filterWinc
+                  ? { _hover: 'none' }
+                  : { backgroundColor: 'gray.200' }
+              }
+              _active={{ _active: 'none' }}
+              backgroundColor={filterWinc ? 'lightblue' : 'white'}
+              onClick={() => setFilterWinc(!filterWinc)}
+            />
+            <IconButton
+              aria-label="qiita"
+              icon={<SiQiita />}
+              borderRadius={'50%'}
+              _hover={
+                filterQiita
+                  ? { _hover: 'none' }
+                  : { backgroundColor: 'gray.200' }
+              }
+              _active={{ _active: 'none' }}
+              backgroundColor={filterQiita ? 'lightblue' : 'white'}
+              onClick={() => setFilterQiita(!filterQiita)}
+            />
+            <IconButton
+              aria-label="zenn"
+              icon={<SiZenn />}
+              borderRadius={'50%'}
+              _hover={
+                filterZenn
+                  ? { _hover: 'none' }
+                  : { backgroundColor: 'gray.200' }
+              }
+              _active={{ _active: 'none' }}
+              backgroundColor={filterZenn ? 'lightblue' : 'white'}
+              onClick={() => setFilterZenn(!filterZenn)}
+            />
+          </Box>
+        </Box>
         <SimpleGrid
           columns={{ sm: 1, md: 2, lg: 3 }}
           gap={5}
