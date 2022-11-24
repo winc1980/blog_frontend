@@ -85,13 +85,11 @@ export default function Home() {
             src={
               'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
             }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
+            title={'室内人数カウントシステムの開発'}
             date={'2022/11/11'}
             tag={'イベント'}
             user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
+            onClick={() => router.push('/viewPost')}
           />
 
           <ArticleCard
