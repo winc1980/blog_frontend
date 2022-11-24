@@ -45,12 +45,10 @@ export default function Home() {
               aria-label="winc"
               icon={<MdEvent />}
               borderRadius={'50%'}
-              _hover={
-                filterWinc
-                  ? { _hover: 'none' }
-                  : { backgroundColor: 'gray.200' }
-              }
-              _active={{ _active: 'none' }}
+              _hover={{
+                boxShadow: filterWinc ? 'none' : '',
+                backgroundColor: filterWinc ? '' : 'gray.200'
+              }}
               backgroundColor={filterWinc ? 'lightblue' : 'white'}
               onClick={() => setFilterWinc(!filterWinc)}
             />
@@ -58,12 +56,10 @@ export default function Home() {
               aria-label="qiita"
               icon={<SiQiita />}
               borderRadius={'50%'}
-              _hover={
-                filterQiita
-                  ? { _hover: 'none' }
-                  : { backgroundColor: 'gray.200' }
-              }
-              _active={{ _active: 'none' }}
+              _hover={{
+                boxShadow: filterQiita ? 'none' : '',
+                backgroundColor: filterQiita ? '' : 'gray.200'
+              }}
               backgroundColor={filterQiita ? 'lightblue' : 'white'}
               onClick={() => setFilterQiita(!filterQiita)}
             />
@@ -71,12 +67,10 @@ export default function Home() {
               aria-label="zenn"
               icon={<SiZenn />}
               borderRadius={'50%'}
-              _hover={
-                filterZenn
-                  ? { _hover: 'none' }
-                  : { backgroundColor: 'gray.200' }
-              }
-              _active={{ _active: 'none' }}
+              _hover={{
+                boxShadow: filterZenn ? 'none' : '',
+                backgroundColor: filterZenn ? '' : 'gray.200'
+              }}
               backgroundColor={filterZenn ? 'lightblue' : 'white'}
               onClick={() => setFilterZenn(!filterZenn)}
             />
@@ -239,9 +233,7 @@ function ArticlePagination() {
     }
   })
 
-  useEffect(() => {
-    console.log('Page', currentPage)
-  }, [currentPage])
+  useEffect(() => {}, [currentPage])
 
   return (
     <Container my={'10'} maxWidth={'100%'} border={'2'}>

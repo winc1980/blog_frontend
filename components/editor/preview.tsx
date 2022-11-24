@@ -10,7 +10,7 @@ import { Box } from '@chakra-ui/react'
 
 interface Props {
   doc: string
-  height: number
+  height?: number
 }
 
 const Preview = ({ height, ...props }: Props) => {
@@ -22,7 +22,7 @@ const Preview = ({ height, ...props }: Props) => {
       pr={'4'}
       pt={'2'}
       pb={'2'}
-      height={height}
+      height={height ? height : 'atuo'}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}

@@ -15,7 +15,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <Fonts />
       <Layout router={router}>
         <AnimatePresence
-          exitBeforeEnter
+          mode="wait"
           initial={true}
           onExitComplete={() => {
             if (typeof window !== 'undefined') {

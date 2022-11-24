@@ -13,6 +13,7 @@ export default function Post() {
   // write, preview, both
   const [mode, setMode] = useState<string>('write')
   const updateMode = (mode: string) => {
+    console.log(doc)
     setMode(mode)
   }
 
@@ -86,12 +87,10 @@ function ModeRadioButton({ mode, updateMode }: ModeRadioButtonProps) {
         aria-label="write"
         icon={<SlPencil />}
         borderRadius={'50%'}
-        _hover={
-          mode === 'write'
-            ? { _hover: 'none' }
-            : { backgroundColor: 'gray.200' }
-        }
-        _active={{ _active: 'none' }}
+        _hover={{
+          boxShadow: mode === 'write' ? 'none' : '',
+          backgroundColor: mode === 'write' ? '' : 'gray.200'
+        }}
         backgroundColor={mode === 'write' ? 'lightblue' : 'white'}
         onClick={() => updateMode('write')}
       />
@@ -99,10 +98,10 @@ function ModeRadioButton({ mode, updateMode }: ModeRadioButtonProps) {
         aria-label="both"
         icon={<HiOutlineBookOpen />}
         borderRadius={'50%'}
-        _hover={
-          mode === 'both' ? { _hover: 'none' } : { backgroundColor: 'gray.200' }
-        }
-        _active={{ _active: 'none' }}
+        _hover={{
+          boxShadow: mode === 'both' ? 'none' : '',
+          backgroundColor: mode === 'both' ? '' : 'gray.200'
+        }}
         backgroundColor={mode === 'both' ? 'lightblue' : 'white'}
         onClick={() => updateMode('both')}
       />
@@ -110,12 +109,10 @@ function ModeRadioButton({ mode, updateMode }: ModeRadioButtonProps) {
         aria-label="preview"
         icon={<FiPlay />}
         borderRadius={'50%'}
-        _hover={
-          mode === 'preview'
-            ? { _hover: 'none' }
-            : { backgroundColor: 'gray.200' }
-        }
-        _active={{ _active: 'none' }}
+        _hover={{
+          boxShadow: mode === 'preview' ? 'none' : '',
+          backgroundColor: mode === 'preview' ? '' : 'gray.200'
+        }}
         backgroundColor={mode === 'preview' ? 'lightblue' : 'white'}
         onClick={() => updateMode('preview')}
       />

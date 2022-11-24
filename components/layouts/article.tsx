@@ -18,9 +18,8 @@ const variants = {
 
 type Props = {
   children: ReactNode
-  title?: string
 }
-export default function Layout({ children, title }: Props) {
+export default function Layout({ children }: Props) {
   const router = useRouter()
 
   const particlesInit = async (main: Engine) => {
@@ -32,7 +31,12 @@ export default function Layout({ children, title }: Props) {
 
   return (
     <>
-      <Box bgImage={bgImg.src} bgRepeat={'no-repeat'} height={'80'}>
+      <Box
+        bgImage={bgImg.src}
+        bgRepeat={'no-repeat'}
+        height={'80'}
+        bgSize={'cover'}
+      >
         <Navbar path={router.asPath} />
         <Particles
           init={particlesInit}
