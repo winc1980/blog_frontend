@@ -1,5 +1,15 @@
-import { Card, Text, CardBody, Image, Stack } from '@chakra-ui/react'
-import { Badge } from '@chakra-ui/react'
+import {
+  Card,
+  Text,
+  CardBody,
+  Image,
+  Stack,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+  Badge,
+  Box
+} from '@chakra-ui/react'
 
 type Props = {
   src: string
@@ -40,6 +50,20 @@ export default function ArticleCard({
         <Text color={'#787878'} fontSize={'xs'}>
           {user}
         </Text>
+      </CardBody>
+    </Card>
+  )
+}
+
+export function ArticleCardSkeleton() {
+  return (
+    <Card maxW="md" overflow={'hidden'} w={'full'}>
+      <Box>
+        <Skeleton height="150px" />
+      </Box>
+      <CardBody>
+        <SkeletonCircle size="10" />
+        <SkeletonText mt="4" noOfLines={4} spacing="4" />
       </CardBody>
     </Card>
   )

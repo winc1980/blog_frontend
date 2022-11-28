@@ -1,7 +1,12 @@
-import { Center, Container, Text } from '@chakra-ui/react'
+import {
+  Box,
+  IconButton,
+  Center,
+  Container,
+  SimpleGrid
+} from '@chakra-ui/react'
 import Layout from 'components/layouts/article'
-import { SimpleGrid } from '@chakra-ui/react'
-import ArticleCard from 'components/articleCard'
+import ArticleCard, { ArticleCardSkeleton } from 'components/articleCard'
 import { useRouter } from 'next/router'
 import {
   Pagination,
@@ -14,7 +19,6 @@ import {
 } from '@ajna/pagination'
 import { useEffect, useState } from 'react'
 
-import { Box, IconButton } from '@chakra-ui/react'
 import { MdEvent } from 'react-icons/md'
 import { SiQiita, SiZenn } from 'react-icons/si'
 
@@ -81,6 +85,9 @@ export default function Home() {
           gap={5}
           justifyItems={'center'}
         >
+          <ArticleCardSkeleton />
+          <ArticleCardSkeleton />
+          <ArticleCardSkeleton />
           <ArticleCard
             src={
               'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
