@@ -14,7 +14,7 @@ import {
 import { Input } from '@chakra-ui/react'
 
 const getLinkedAccounts = async () => {
-  const response = await fetch('https://dog.ceo/api/breeds/image/random')
+  const response = await fetch('http://54.92.98.55/feeds/')
   const res = await response.json()
   return res
 }
@@ -22,8 +22,9 @@ const getLinkedAccounts = async () => {
 export default function LinkAccounts() {
   const [accountName, setAccountName] = useState('')
 
-  const handleClick = () => {
-    console.log(accountName)
+  const handleClick = async () => {
+    const res = await getLinkedAccounts()
+    console.log(res)
   }
 
   const accountList = ['@empelt', '@addbakkers', '@tetsuya', '@hibiki']

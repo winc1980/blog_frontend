@@ -17,7 +17,7 @@ import {
   PaginationContainer,
   PaginationPageGroup
 } from '@ajna/pagination'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { MdEvent } from 'react-icons/md'
 import { SiQiita, SiZenn } from 'react-icons/si'
@@ -25,7 +25,24 @@ import { SiQiita, SiZenn } from 'react-icons/si'
 const outerLimit = 1
 const innerLimit = 1
 
+const getLinkedAccounts = async (
+  setLoading: Dispatch<SetStateAction<boolean>>
+) => {
+  setLoading(true)
+  const response = await fetch('http://54.92.98.55/articles/')
+  const res = await response.json()
+  setLoading(false)
+  return res
+}
+
 export default function Home() {
+  const [articles, setArticles] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    getLinkedAccounts(setLoading).then(data => setArticles(data))
+  }, [])
+
   const router = useRouter()
 
   const openUrl = (url: string) => {
@@ -80,145 +97,53 @@ export default function Home() {
             />
           </Box>
         </Box>
+        {loading && (
+          <SimpleGrid
+            columns={{ sm: 1, md: 2, lg: 3 }}
+            gap={5}
+            justifyItems={'center'}
+          >
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+            <ArticleCardSkeleton />
+          </SimpleGrid>
+        )}
         <SimpleGrid
           columns={{ sm: 1, md: 2, lg: 3 }}
           gap={5}
           justifyItems={'center'}
         >
-          <ArticleCardSkeleton />
-          <ArticleCardSkeleton />
-          <ArticleCardSkeleton />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'室内人数カウントシステムの開発'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() => router.push('/viewPost')}
-          />
-
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
-          <ArticleCard
-            src={
-              'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            }
-            title={'Next.js + Chakra UI で簡易ダッシュボード構築してみた'}
-            date={'2022/11/11'}
-            tag={'イベント'}
-            user={'@empelt'}
-            onClick={() =>
-              openUrl('https://qiita.com/TK-C/items/c64ca54b634b0cae0059')
-            }
-          />
+          {articles.map((article, i) => {
+            return (
+              <ArticleCard
+                src={
+                  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+                }
+                title={article['Title']}
+                date={article['Published']}
+                tag={'イベント'}
+                user={'@' + article['Name']}
+                onClick={() => openUrl(article['Link'])}
+                key={i}
+              />
+            )
+          })}
         </SimpleGrid>
         <ArticlePagination />
       </Container>
