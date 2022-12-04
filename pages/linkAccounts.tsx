@@ -14,7 +14,7 @@ import {
 import { Input } from '@chakra-ui/react'
 
 const getLinkedAccounts = async () => {
-  const response = await fetch('http://54.92.98.55/feeds/')
+  const response = await fetch('https://api.winc.ne.jp/articles/')
   const res = await response.json()
   return res
 }

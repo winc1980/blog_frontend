@@ -29,7 +29,7 @@ const getLinkedAccounts = async (
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading(true)
-  const response = await fetch('http://54.92.98.55/articles/')
+  const response = await fetch('https://api.winc.ne.jp/articles/')
   const res = await response.json()
   setLoading(false)
   return res
