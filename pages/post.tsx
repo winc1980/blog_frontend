@@ -40,33 +40,40 @@ export default function Post() {
 
   return (
     <Layout>
-      <FormControl>
-        <ModeRadioButton mode={mode} updateMode={updateMode} />
-        <Input placeholder="タイトル" mb={'8'} focusBorderColor={'none'} />
+      <Box display={'flex'} gap={'50px'}>
+        <FormControl>
+          <Input
+            placeholder="タイトル"
+            mb={'8'}
+            focusBorderColor={'none'}
+            mt={'4'}
+          />
 
-        <Box display={'flex'} w={'full'} gap={4} mb={'8'}>
-          <Box
-            w={'full'}
-            position={mode === 'preview' ? 'absolute' : 'unset'}
-            visibility={mode === 'preview' ? 'hidden' : 'unset'}
-            ref={ref}
-          >
-            <Editor doc={doc} onChange={updateDoc} />
+          <Box display={'flex'} w={'full'} gap={4} mb={'8'}>
+            <Box
+              w={'full'}
+              position={mode === 'preview' ? 'absolute' : 'unset'}
+              visibility={mode === 'preview' ? 'hidden' : 'unset'}
+              ref={ref}
+            >
+              <Editor doc={doc} onChange={updateDoc} />
+            </Box>
+            <Box
+              w={'full'}
+              position={mode === 'write' ? 'absolute' : 'unset'}
+              visibility={mode === 'write' ? 'hidden' : 'unset'}
+            >
+              <Preview doc={doc} height={height} />
+            </Box>
           </Box>
-          <Box
-            w={'full'}
-            position={mode === 'write' ? 'absolute' : 'unset'}
-            visibility={mode === 'write' ? 'hidden' : 'unset'}
-          >
-            <Preview doc={doc} height={height} />
+          <Box display={'flex'} justifyContent={'flex-end'}>
+            <Button alignContent={'right'} colorScheme="blue">
+              投稿
+            </Button>
           </Box>
-        </Box>
-        <Box display={'flex'} justifyContent={'flex-end'}>
-          <Button alignContent={'right'} colorScheme="blue">
-            投稿
-          </Button>
-        </Box>
-      </FormControl>
+        </FormControl>
+        <ModeRadioButton mode={mode} updateMode={updateMode} />
+      </Box>
     </Layout>
   )
 }
@@ -78,44 +85,50 @@ type ModeRadioButtonProps = {
 function ModeRadioButton({ mode, updateMode }: ModeRadioButtonProps) {
   return (
     <Box
-      display={'flex'}
       backgroundColor={'white'}
-      justifyContent={'space-evenly'}
-      w={'36'}
+      position={'sticky'}
+      top={'120px'}
+      height={'200px'}
     >
-      <IconButton
-        aria-label="write"
-        icon={<SlPencil />}
-        borderRadius={'50%'}
-        _hover={{
-          boxShadow: mode === 'write' ? 'none' : '',
-          backgroundColor: mode === 'write' ? '' : 'gray.200'
-        }}
-        backgroundColor={mode === 'write' ? 'lightblue' : 'white'}
-        onClick={() => updateMode('write')}
-      />
-      <IconButton
-        aria-label="both"
-        icon={<HiOutlineBookOpen />}
-        borderRadius={'50%'}
-        _hover={{
-          boxShadow: mode === 'both' ? 'none' : '',
-          backgroundColor: mode === 'both' ? '' : 'gray.200'
-        }}
-        backgroundColor={mode === 'both' ? 'lightblue' : 'white'}
-        onClick={() => updateMode('both')}
-      />
-      <IconButton
-        aria-label="preview"
-        icon={<FiPlay />}
-        borderRadius={'50%'}
-        _hover={{
-          boxShadow: mode === 'preview' ? 'none' : '',
-          backgroundColor: mode === 'preview' ? '' : 'gray.200'
-        }}
-        backgroundColor={mode === 'preview' ? 'lightblue' : 'white'}
-        onClick={() => updateMode('preview')}
-      />
+      <Box>
+        <IconButton
+          aria-label="write"
+          icon={<SlPencil />}
+          borderRadius={'50%'}
+          _hover={{
+            boxShadow: mode === 'write' ? 'none' : '',
+            backgroundColor: mode === 'write' ? '' : 'gray.200'
+          }}
+          backgroundColor={mode === 'write' ? 'lightblue' : 'white'}
+          onClick={() => updateMode('write')}
+        />
+      </Box>
+      <Box mt={'2'}>
+        <IconButton
+          aria-label="both"
+          icon={<HiOutlineBookOpen />}
+          borderRadius={'50%'}
+          _hover={{
+            boxShadow: mode === 'both' ? 'none' : '',
+            backgroundColor: mode === 'both' ? '' : 'gray.200'
+          }}
+          backgroundColor={mode === 'both' ? 'lightblue' : 'white'}
+          onClick={() => updateMode('both')}
+        />
+      </Box>
+      <Box mt={'2'}>
+        <IconButton
+          aria-label="preview"
+          icon={<FiPlay />}
+          borderRadius={'50%'}
+          _hover={{
+            boxShadow: mode === 'preview' ? 'none' : '',
+            backgroundColor: mode === 'preview' ? '' : 'gray.200'
+          }}
+          backgroundColor={mode === 'preview' ? 'lightblue' : 'white'}
+          onClick={() => updateMode('preview')}
+        />
+      </Box>
     </Box>
   )
 }

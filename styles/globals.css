@@ -35,3 +35,16 @@ a {
   height: 320px;
   position: absolute;
 }
+
+.preview.markdown-body pre {
+  position: relative;
+  margin-bottom: 3em !important;
+  background-color: #1c2637;
+  color: white;
+}
+
+.preview-code {
+  background-color: #1c2637 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

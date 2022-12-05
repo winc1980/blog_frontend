@@ -1,7 +1,7 @@
 import type React from 'react'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { prism } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { tomorrow } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import 'github-markdown-css/github-markdown.css'
 import ReactMarkdown from 'react-markdown'
 import { CodeProps } from 'react-markdown/lib/ast-to-react'
@@ -23,6 +23,8 @@ const Preview = ({ height, ...props }: Props) => {
       pt={'2'}
       pb={'2'}
       height={height ? height : 'atuo'}
+      bgColor={'white'}
+      color={'black'}
     >
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
@@ -42,9 +44,10 @@ const Preview = ({ height, ...props }: Props) => {
             const match = /language-(\w+)/.exec(className || '')
             return !inline && match ? (
               <SyntaxHighlighter
-                style={prism}
+                style={tomorrow}
                 language={match[1]}
                 PreTag="div"
+                className="preview-code"
                 {...props}
               >
                 {String(children).replace(/\n$/, '')}

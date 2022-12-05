@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Container, Text } from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
 import SimpleNavbar from 'components/simpleNavber'
 import { useRouter } from 'next/router'
 import Footer from 'components/footer'
@@ -14,7 +14,7 @@ export default function Layout({ children }: Props) {
     <>
       <SimpleNavbar path={router.asPath} />
 
-      <Container maxW="container.md" pt={14}>
+      <Container maxW="container.lg" pt={14}>
         {children}
       </Container>
 

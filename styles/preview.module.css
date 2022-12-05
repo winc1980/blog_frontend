@@ -2,7 +2,8 @@
   padding: 10px;
   overflow: auto;
   box-sizing: border-box;
-  color: #abb2bf;
+  background-color: white !important;
+  color: black;
 }
 
 .preview.markdown-body pre {
