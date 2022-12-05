@@ -40,7 +40,10 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getLinkedAccounts(setLoading).then(data => setArticles(data))
+    getLinkedAccounts(setLoading).then(data => {
+      setArticles(data)
+      console.log(data)
+    })
   }, [])
 
   const router = useRouter()
@@ -129,21 +132,22 @@ export default function Home() {
           gap={5}
           justifyItems={'center'}
         >
-          {articles.map((article, i) => {
-            return (
-              <ArticleCard
-                src={
-                  'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-                }
-                title={article['Title']}
-                date={article['Published']}
-                tag={'イベント'}
-                user={'@' + article['Name']}
-                onClick={() => openUrl(article['Link'])}
-                key={i}
-              />
-            )
-          })}
+          {articles &&
+            articles.map((article, i) => {
+              return (
+                <ArticleCard
+                  src={
+                    'https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
+                  }
+                  title={article['Title']}
+                  date={article['Published']}
+                  tag={'イベント'}
+                  user={'@' + article['Name']}
+                  onClick={() => openUrl(article['Link'])}
+                  key={i}
+                />
+              )
+            })}
         </SimpleGrid>
         <ArticlePagination />
       </Container>
