@@ -27,6 +27,8 @@ import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 import React, { ReactNode, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
+import { signOut, useSession } from 'next-auth/react'
+import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 
 type LinkItemProps = {
   href: string
@@ -64,6 +66,7 @@ type Props = {
 export default function Navbar({ path, auth, ...props }: Props) {
   const handleClick = () => {}
   const [isFocused, setFocused] = useState(false)
+  const { data: session } = useSession()
 
   return (
     <Box
@@ -120,45 +123,61 @@ export default function Navbar({ path, auth, ...props }: Props) {
               />
             </InputRightElement>
           </InputGroup>
-          {/* <SwitchThemeButton /> */}
         </Box>
-        <Stack
-          direction={{ base: 'column', md: 'row' }}
-          display={{ base: 'none', md: 'flex' }}
-          // width={{ base: 'full', md: 'auto' }}
-          maxW={'180px'}
-          alignItems="center"
-          flexGrow={1}
-          mt={{ base: 4, md: 0 }}
-        >
-          <LinkItem href="/post" path={path}>
-            記事投稿
-          </LinkItem>
-          <LinkItem href="/login" path={path}>
-            ログイン
-          </LinkItem>
-        </Stack>
+        {session && (
+          <>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              display={{ base: 'none', md: 'flex' }}
+              // width={{ base: 'full', md: 'auto' }}
+              maxW={'180px'}
+              alignItems="center"
+              flexGrow={1}
+              mt={{ base: 4, md: 0 }}
+              justifyContent={'space-evenly'}
+            >
+              <LinkItem href="/post" path={path}>
+                記事投稿
+              </LinkItem>
+              <Menu>
+                <MenuButton>
+                  <Avatar
+                    width={'40px'}
+                    height={'40px'}
+                    src={session.user.image ?? ''}
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
+                </MenuList>
+              </Menu>
+            </Stack>
 
-        <Box flex={1} textAlign="right" maxW={'180px'}>
-          <Box ml={2} display={{ base: 'inline-block', md: 'none' }}>
-            <Menu isLazy id="navbar-menu">
-              <MenuButton
-                as={IconButton}
-                icon={<HamburgerIcon />}
-                variant="outline"
-                aria-label="Options"
-              />
-              <MenuList>
-                <NextLink href="/login" passHref>
-                  <MenuItem as={Link}>ログイン</MenuItem>
-                </NextLink>
-                <NextLink href="/post" passHref>
-                  <MenuItem as={Link}>記事投稿</MenuItem>
-                </NextLink>
-              </MenuList>
-            </Menu>
-          </Box>
-        </Box>
+            <Box
+              flex={1}
+              textAlign="right"
+              maxW={'180px'}
+              display={{ base: 'inline-block', md: 'none' }}
+            >
+              <Box ml={2}>
+                <Menu isLazy id="navbar-menu">
+                  <MenuButton
+                    as={IconButton}
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                    aria-label="Options"
+                  />
+                  <MenuList>
+                    <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
+                    <NextLink href="/post" passHref>
+                      <MenuItem as={Link}>記事投稿</MenuItem>
+                    </NextLink>
+                  </MenuList>
+                </Menu>
+              </Box>
+            </Box>
+          </>
+        )}
       </Container>
     </Box>
   )

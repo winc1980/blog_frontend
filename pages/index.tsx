@@ -18,9 +18,10 @@ import {
   PaginationPageGroup
 } from '@ajna/pagination'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-
+import { signOut, useSession } from 'next-auth/react'
 import { MdEvent } from 'react-icons/md'
 import { SiQiita, SiZenn } from 'react-icons/si'
+import { Tooltip } from '@chakra-ui/react'
 
 const outerLimit = 1
 const innerLimit = 1
@@ -38,6 +39,7 @@ const getLinkedAccounts = async (
 export default function Home() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(false)
+  const { data: session } = useSession()
 
   useEffect(() => {
     getLinkedAccounts(setLoading).then(data => {
@@ -65,17 +67,27 @@ export default function Home() {
             justifyContent={'space-evenly'}
             w={'36'}
           >
-            <IconButton
-              aria-label="winc"
-              icon={<MdEvent />}
-              borderRadius={'50%'}
-              _hover={{
-                boxShadow: filterWinc ? 'none' : '',
-                backgroundColor: filterWinc ? '' : 'gray.200'
-              }}
-              backgroundColor={filterWinc ? 'lightblue' : 'white'}
-              onClick={() => setFilterWinc(!filterWinc)}
-            />
+            <Tooltip
+              label={
+                filterWinc
+                  ? 'WINCのイベントの記事を非表示にする'
+                  : 'WINCのイベントの記事を表示する'
+              }
+              placement="top"
+            >
+              <IconButton
+                aria-label="winc"
+                icon={<MdEvent />}
+                borderRadius={'50%'}
+                _hover={{
+                  boxShadow: filterWinc ? 'none' : '',
+                  backgroundColor: filterWinc ? '' : 'gray.200'
+                }}
+                backgroundColor={filterWinc ? 'lightblue' : 'white'}
+                onClick={() => setFilterWinc(!filterWinc)}
+              />
+            </Tooltip>
+
             <IconButton
               aria-label="qiita"
               icon={<SiQiita />}

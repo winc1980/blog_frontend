@@ -1,28 +1,11 @@
 import Layout from 'components/layouts/login'
-import { useState } from 'react'
-import {
-  Flex,
-  Heading,
-  Input,
-  Button,
-  InputGroup,
-  Stack,
-  InputLeftElement,
-  chakra,
-  Box,
-  Avatar,
-  FormControl,
-  InputRightElement
-} from '@chakra-ui/react'
-import { FaUserAlt, FaLock } from 'react-icons/fa'
-
-const CFaUserAlt = chakra(FaUserAlt)
-const CFaLock = chakra(FaLock)
+import { Flex, Heading, Button, Stack, Box, Avatar } from '@chakra-ui/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false)
+  const { data: session } = useSession()
 
-  const handleShowClick = () => setShowPassword(!showPassword)
+  const buttonClick = () => {}
 
   return (
     <Layout>
@@ -40,46 +23,39 @@ export default function Login() {
                 maxW={'300px'}
                 margin={'0 auto'}
               >
-                <FormControl>
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<CFaUserAlt color="gray.300" />}
-                    />
-                    <Input type="email" placeholder="email address" />
-                  </InputGroup>
-                </FormControl>
-                <FormControl>
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      color="gray.300"
-                      children={<CFaLock color="gray.300" />}
-                    />
-                    <Input
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Password"
-                    />
-                    <InputRightElement width="4.5rem">
-                      <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                        {showPassword ? 'Hide' : 'Show'}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </FormControl>
                 <Button
                   borderRadius={0}
                   type="submit"
                   variant="solid"
                   colorScheme="teal"
                   width="full"
+                  onClick={() => signIn('', { callbackUrl: '/' })}
                 >
                   Login
                 </Button>
+                {session && (
+                  <>
+                    Signed in as{' '}
+                    <img src={session.user.image ?? ''} width="50px" />
+                    {session.user.name} <br />
+                    AccessToken : {session.user.accessToken} <br />
+                    <button onClick={() => signOut()}>Sign out</button>{' '}
+                  </>
+                )}
               </Stack>
             </form>
           </Box>
         </Stack>
+        <Button
+          borderRadius={0}
+          type="submit"
+          variant="solid"
+          colorScheme="teal"
+          width="full"
+          onClick={() => buttonClick()}
+        >
+          Login
+        </Button>
       </Flex>
     </Layout>
   )
