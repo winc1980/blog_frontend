@@ -59,6 +59,19 @@ export default function LinkAccounts() {
   }
 
   const linkZennAccount = async () => {
+    if (zennAccountName !== '') {
+      const response = await fetch('https://api.winc.ne.jp/members/', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          zenn: zennAccountName,
+          token: session?.user.accessToken
+        })
+      })
+      console.log(response)
+    }
     console.log(zennAccountName + 'アカウント連携！')
   }
 
