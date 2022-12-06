@@ -27,7 +27,7 @@ import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 import React, { ReactNode, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut, signIn, useSession } from 'next-auth/react'
 import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 
 type LinkItemProps = {
@@ -124,6 +124,7 @@ export default function Navbar({ path, auth, ...props }: Props) {
             </InputRightElement>
           </InputGroup>
         </Box>
+        <Button onClick={() => signIn()}>ログイン</Button>
         {session && (
           <>
             <Stack
