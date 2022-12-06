@@ -6,7 +6,7 @@ export default function Login() {
   const { data: session } = useSession()
 
   const buttonClick = () => {
-    console.log(process.env.NEXTAUTH_SECRET)
+    console.log(process.env.NEXT_PUBLIC_NEXTAUTH_SECRET)
   }
 
   return (

@@ -40,6 +40,16 @@ export default function LinkAccounts() {
   }, [])
 
   const linkQiitaAccount = async () => {
+    if (qiitaAccountName !== '') {
+      const response = await fetch('https://api.winc.ne.jp/members/', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ qiita: qiitaAccountName })
+      })
+      console.log(response)
+    }
     console.log(qiitaAccountName + 'アカウント連携！')
   }
 
