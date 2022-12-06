@@ -22,7 +22,7 @@ export default NextAuth({
       return session
     },
     async signIn({ account }) {
-      const response = await fetch('https://api.winc.ne.jp/settoken/', {
+      const response = await fetch('https://api.winc.ne.jp/members/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
