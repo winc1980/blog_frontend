@@ -5,7 +5,9 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 export default function Login() {
   const { data: session } = useSession()
 
-  const buttonClick = () => {}
+  const buttonClick = () => {
+    console.log(process.env.NEXT_PUBLIC_GITHUB_ID)
+  }
 
   return (
     <Layout>

@@ -26,7 +26,7 @@ export default NextAuth({
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ token: 'a' })
+        body: JSON.stringify({ token: account?.access_token })
       })
       console.log(response)
 
