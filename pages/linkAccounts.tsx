@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { Input, Icon } from '@chakra-ui/react'
 import { MdDelete } from 'react-icons/md'
+import { useSession } from 'next-auth/react'
 
 const getLinkedQiitaAccounts = async () => {
   const response = await fetch('https://api.winc.ne.jp/github_team/')
@@ -29,6 +30,7 @@ const getLinkedZennAccounts = async () => {
 export default function LinkAccounts() {
   const [qiitaAccountName, setQiitaAccountName] = useState('')
   const [zennAccountName, setZennAccountName] = useState('')
+  const { data: session } = useSession()
 
   useEffect(() => {
     ;(async () => {
@@ -46,7 +48,10 @@ export default function LinkAccounts() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ qiita: qiitaAccountName })
+        body: JSON.stringify({
+          qiita: qiitaAccountName,
+          token: session?.user.accessToken
+        })
       })
       console.log(response)
     }
