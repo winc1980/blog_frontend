@@ -26,11 +26,14 @@ import { Tooltip } from '@chakra-ui/react'
 const outerLimit = 1
 const innerLimit = 1
 
-const getLinkedAccounts = async (
-  setLoading: Dispatch<SetStateAction<boolean>>
+const getArticles = async (
+  setLoading: Dispatch<SetStateAction<boolean>>,
+  page: number
 ) => {
   setLoading(true)
-  const response = await fetch('https://api.winc.ne.jp/articles/')
+  const response = await fetch(
+    'https://api.winc.ne.jp/articles/?page=' + String(page)
+  )
   const res = await response.json()
   setLoading(false)
   return res
@@ -39,11 +42,13 @@ const getLinkedAccounts = async (
 export default function Home() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(false)
+  const [pagesCount, setPagesCount] = useState(0)
   const { data: session } = useSession()
 
   useEffect(() => {
-    getLinkedAccounts(setLoading).then(data => {
-      setArticles(data)
+    getArticles(setLoading, 1).then(data => {
+      setArticles(data['items'])
+      setPagesCount(data['pages_count'])
       console.log(data)
     })
   }, [])
@@ -52,6 +57,13 @@ export default function Home() {
 
   const openUrl = (url: string) => {
     window.open(url, '_blank')
+  }
+
+  const changeCurrentPage = (page: number) => {
+    getArticles(setLoading, page).then(data => {
+      setArticles(data)
+      console.log(data)
+    })
   }
 
   const [filterWinc, setFilterWinc] = useState(true)
@@ -159,7 +171,12 @@ export default function Home() {
               )
             })}
         </SimpleGrid>
-        <ArticlePagination />
+        {articles && (
+          <ArticlePagination
+            changeCurrentPage={changeCurrentPage}
+            pagesCount_={pagesCount}
+          />
+        )}
       </Container>
     </Layout>
   )
@@ -167,9 +184,16 @@ export default function Home() {
 
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 
-function ArticlePagination() {
+type ArticlePaginationProps = {
+  changeCurrentPage: (page: number) => void
+  pagesCount_: number
+}
+function ArticlePagination({
+  changeCurrentPage,
+  pagesCount_
+}: ArticlePaginationProps) {
   const { currentPage, setCurrentPage, pagesCount, pages } = usePagination({
-    pagesCount: 20,
+    pagesCount: pagesCount_,
     initialState: { currentPage: 1 },
     limits: {
       outer: outerLimit,
@@ -177,7 +201,9 @@ function ArticlePagination() {
     }
   })
 
-  useEffect(() => {}, [currentPage])
+  useEffect(() => {
+    changeCurrentPage(currentPage)
+  }, [currentPage])
 
   return (
     <Container my={'10'} maxWidth={'100%'} border={'2'}>

@@ -17,6 +17,10 @@ export default function Post() {
     setMode(mode)
   }
 
+  const [title, setTitle] = useState<string>('')
+  const updateTitle = (title: string) => {
+    setTitle(title)
+  }
   const [doc, setDoc] = useState<string>('')
   const updateDoc = (doc: string) => {
     setDoc(doc)
@@ -47,6 +51,8 @@ export default function Post() {
             mb={'8'}
             focusBorderColor={'none'}
             mt={'4'}
+            value={title}
+            onChange={e => updateTitle(e.target.value)}
           />
 
           <Box display={'flex'} w={'full'} gap={4} mb={'8'}>
