@@ -47,8 +47,8 @@ export default function Home() {
 
   useEffect(() => {
     getArticles(setLoading, 1).then(data => {
-      setArticles(data['items'])
-      setPagesCount(data['pages_count'])
+      setArticles(data['Items'])
+      setPagesCount(data['Pages_count'])
       console.log(data)
     })
   }, [])
