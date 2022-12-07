@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <Layout>
       <Container maxW="container.lg">
-        <Box display={'flex'} justifyContent={'flex-end'} mb={'2'}>
+        {/* <Box display={'flex'} justifyContent={'flex-end'} mb={'2'}>
           <Box
             display={'flex'}
             backgroundColor={'white'}
@@ -111,7 +111,7 @@ export default function Home() {
               onClick={() => setFilterZenn(!filterZenn)}
             />
           </Box>
-        </Box>
+        </Box> */}
         {loading && (
           <SimpleGrid
             columns={{ sm: 1, md: 2, lg: 3 }}
