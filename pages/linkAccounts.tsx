@@ -114,7 +114,7 @@ export default function LinkAccounts() {
                 </Tr>
               </Thead>
               <Tbody>
-                {linkedAccounts &&
+                {linkedAccounts.length &&
                   linkedAccounts.map((account, i) => {
                     if ('qiita' in account) {
                       return (
@@ -165,7 +165,7 @@ export default function LinkAccounts() {
                 </Tr>
               </Thead>
               <Tbody>
-                {linkedAccounts &&
+                {linkedAccounts.length &&
                   linkedAccounts.map((account, i) => {
                     if ('zenn' in account) {
                       return (
