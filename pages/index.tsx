@@ -18,7 +18,7 @@ import {
   PaginationPageGroup
 } from '@ajna/pagination'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { MdEvent } from 'react-icons/md'
 import { SiQiita, SiZenn } from 'react-icons/si'
 import { Tooltip } from '@chakra-ui/react'

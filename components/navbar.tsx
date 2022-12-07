@@ -16,19 +16,15 @@ import {
   useColorModeValue,
   LinkProps,
   Heading,
-  Icon,
-  Button,
-  HStack,
   InputGroup,
   Input,
   InputRightElement
 } from '@chakra-ui/react'
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
 import React, { ReactNode, useState } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
-import { useForm } from 'react-hook-form'
-import { signOut, signIn, useSession } from 'next-auth/react'
-import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+import { signOut, useSession } from 'next-auth/react'
+import { Avatar } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 type LinkItemProps = {
   href: string
@@ -67,6 +63,7 @@ export default function Navbar({ path, auth, ...props }: Props) {
   const handleClick = () => {}
   const [isFocused, setFocused] = useState(false)
   const { data: session } = useSession()
+  const router = useRouter()
 
   return (
     <Box
@@ -88,7 +85,14 @@ export default function Navbar({ path, auth, ...props }: Props) {
       >
         <Flex align="center" mr={5}>
           <Heading as="h1" size="md" letterSpacing={'tighter'}>
-            <Text color={'white'}>WINC TECH BLOG</Text>
+            <Text
+              color={'#1c2637'}
+              fontSize={{ md: 'xl', base: 'md' }}
+              onClick={() => router.push('/')}
+              cursor={'pointer'}
+            >
+              WINC TECH BLOG
+            </Text>
           </Heading>
         </Flex>
 
@@ -120,18 +124,18 @@ export default function Navbar({ path, auth, ...props }: Props) {
                 bgColor={'transparent'}
                 border={'none'}
                 borderRadius={0}
+                color={'rgb(112,112,112)'}
               />
             </InputRightElement>
           </InputGroup>
         </Box>
-        <Button onClick={() => signIn()}>ログイン</Button>
         {session && (
           <>
             <Stack
               direction={{ base: 'column', md: 'row' }}
               display={{ base: 'none', md: 'flex' }}
               // width={{ base: 'full', md: 'auto' }}
-              maxW={'180px'}
+              maxW={'300px'}
               alignItems="center"
               flexGrow={1}
               mt={{ base: 4, md: 0 }}
@@ -139,6 +143,9 @@ export default function Navbar({ path, auth, ...props }: Props) {
             >
               <LinkItem href="/post" path={path}>
                 記事投稿
+              </LinkItem>
+              <LinkItem href="/linkAccounts" path={path}>
+                アカウント連携
               </LinkItem>
               <Menu>
                 <MenuButton>
@@ -157,7 +164,7 @@ export default function Navbar({ path, auth, ...props }: Props) {
             <Box
               flex={1}
               textAlign="right"
-              maxW={'180px'}
+              maxW={'50px'}
               display={{ base: 'inline-block', md: 'none' }}
             >
               <Box ml={2}>
@@ -169,10 +176,13 @@ export default function Navbar({ path, auth, ...props }: Props) {
                     aria-label="Options"
                   />
                   <MenuList>
-                    <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
                     <NextLink href="/post" passHref>
                       <MenuItem as={Link}>記事投稿</MenuItem>
                     </NextLink>
+                    <NextLink href="/linkAccounts" passHref>
+                      <MenuItem as={Link}>アカウント連携</MenuItem>
+                    </NextLink>
+                    <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
                   </MenuList>
                 </Menu>
               </Box>

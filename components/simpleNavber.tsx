@@ -4,29 +4,14 @@ import {
   Container,
   Box,
   BoxProps,
-  Link,
-  Stack,
   Text,
   Flex,
-  Menu,
-  MenuItem,
-  MenuList,
-  MenuButton,
-  IconButton,
   useColorModeValue,
   LinkProps,
-  Heading,
-  Icon,
-  Button,
-  HStack,
-  InputGroup,
-  Input,
-  InputRightElement
+  Heading
 } from '@chakra-ui/react'
-import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons'
-import React, { ReactNode, useState } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai'
-import { useForm } from 'react-hook-form'
+import React, { ReactNode } from 'react'
+import { useRouter } from 'next/router'
 
 type LinkItemProps = {
   href: string
@@ -61,6 +46,7 @@ type Props = {
 } & BoxProps
 
 export default function SimpleNavbar({ path, ...props }: Props) {
+  const router = useRouter()
   return (
     <Box
       position="fixed"
@@ -81,7 +67,13 @@ export default function SimpleNavbar({ path, ...props }: Props) {
       >
         <Flex align="center" mr={5}>
           <Heading as="h1" size="md" letterSpacing={'tighter'}>
-            <Text color={'white'}>WINC TECH BLOG</Text>
+            <Text
+              color={'#1c2637'}
+              onClick={() => router.push('/')}
+              cursor={'pointer'}
+            >
+              WINC TECH BLOG
+            </Text>
           </Heading>
         </Flex>
       </Container>

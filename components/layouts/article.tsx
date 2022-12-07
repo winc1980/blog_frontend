@@ -154,8 +154,8 @@ export default function Layout({ children }: Props) {
         />
         <Box textAlign={'center'} pt={28}>
           <Text color={'white'}>WINCメンバーが執筆した記事を紹介します。</Text>
-          <Text fontSize={'6xl'} color={'white'}>
-            WINC ENGINEER BLOG
+          <Text fontSize={{ md: '6xl', base: '5xl' }} color={'white'}>
+            WINC TECH BLOG
           </Text>
         </Box>
       </Box>
