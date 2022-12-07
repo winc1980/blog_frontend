@@ -46,7 +46,7 @@ export default function ArticleCard({
           <Badge colorScheme="blue">{tag}</Badge>
         </Stack>
 
-        <Text fontWeight={'bold'} mt={'1'}>
+        <Text fontWeight={'bold'} mt={'1'} wordBreak={'break-word'}>
           {title}
         </Text>
         <Text color={'#787878'} fontSize={'xs'}>
